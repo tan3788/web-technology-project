@@ -58,6 +58,41 @@ body.dark-mode .text-muted{
     color: #bdbdbd !important;
 }
 
+body{
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.card{
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.navbar{
+    transition: 0.3s;
+}
+
+.navbar-brand{
+    letter-spacing: 1px;
+}
+
+.navbar .btn{
+    transition: 0.3s;
+}
+
+.navbar .btn:hover{
+    transform: translateY(-2px);
+}
+
+footer{
+    border-top: 2px solid #444;
+    transition: 0.3s;
+}
+
 </style>
 
 </head>
@@ -66,64 +101,99 @@ body.dark-mode .text-muted{
 
 <body>
     <!-- Navigation -->
-     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-         <div class="container">
-            <a class="navbar-brand" href="index.php">
-                <i class="bi bi-shop"></i> Simple Store
-            </a>
-            
-             <div class="d-flex align-items-center">
 
-                 <?php if(isset($_SESSION['username'])) { ?>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
 
-                     <a href="profile.php" class="btn btn-light me-2">
-                        Profile
-                     </a>
+    <div class="container">
 
-                     <a href="cart.php" class="btn btn-outline-light me-2">
-                         <i class="bi bi-cart"></i> Cart 
-                         <?php if ($cartCount > 0): ?>
+        <a class="navbar-brand fw-bold fs-4" href="index.php">
+            SimpleStore
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <div class="ms-auto d-flex align-items-center gap-2">
+
+                <?php if(isset($_SESSION['username'])) { ?>
+
+                    <span class="text-white me-2">
+                        Welcome, <?php echo $_SESSION['username']; ?>
+                    </span>
+
+                    <a href="profile.php"
+                       class="btn btn-outline-light btn-sm">
+
+                       Profile
+                    </a>
+
+                    <a href="cart.php"
+                       class="btn btn-outline-warning btn-sm">
+
+                        Cart
+                        <?php if ($cartCount > 0): ?>
                             <span class="badge bg-warning text-dark">
-                               <?php echo $cartCount; ?>
+                                <?php echo $cartCount; ?>
                             </span>
-                         <?php endif; ?>
-                     </a>
+                        <?php endif; ?>
 
-                     <button onclick="toggleDarkMode()" 
-                             class="btn btn-dark me-2">
+                    </a>
 
-                          Dark Mode
-                     </button>
+                    <button onclick="toggleDarkMode()"
+                            class="btn btn-secondary btn-sm">
 
-                     <a href="logout.php" class="btn btn-danger">
-                         Logout
-                     </a>
+                        Dark Mode
+                    </button>
 
-                 <?php } else { ?>
+                    <a href="logout.php"
+                       class="btn btn-danger btn-sm">
 
-                     <a href="login.php" class="btn btn-light me-2">
+                       Logout
+                    </a>
+
+                <?php } else { ?>
+
+                    <a href="login.php"
+                       class="btn btn-outline-light btn-sm">
+
                        Login
-                     </a>
+                    </a>
 
-                     <a href="register.php" class="btn btn-success me-2">
+                    <a href="register.php"
+                       class="btn btn-warning btn-sm">
+
                        Register
-                     </a>
+                    </a>
 
-                     <a href="cart.php" class="btn btn-outline-light">
-                        <i class="bi bi-cart"></i> Cart 
-                         <?php if ($cartCount > 0): ?>
-                             <span class="badge bg-warning text-dark">
-                                 <?php echo $cartCount; ?>
-                             </span>
-                         <?php endif; ?>
-                     </a>
+                    <a href="cart.php"
+                       class="btn btn-outline-warning btn-sm">
 
-                 <?php } ?>
+                        Cart
+                        <?php if ($cartCount > 0): ?>
+                            <span class="badge bg-warning text-dark">
+                                <?php echo $cartCount; ?>
+                            </span>
+                        <?php endif; ?>
 
-             </div>
-            
-         </div>
-     </nav>
+                    </a>
+
+                <?php } ?>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+     
 
     <div class="container py-4">
         <h1 class="mb-4">Our Products</h1>
@@ -307,6 +377,27 @@ if(localStorage.getItem("theme") === "dark"){
 }
 
 </script>
+
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+
+    <div class="container">
+
+        <h5 class="mb-2">
+            SimpleStore
+        </h5>
+
+        <p class="mb-1">
+            Modern Ecommerce Web Application
+        </p>
+
+        <small>
+            Developed for Web Technology Project © 2026
+        </small>
+
+    </div>
+
+</footer>
 
 </body>
 </html>

@@ -53,7 +53,9 @@ if(isset($_POST['login'])){
 
     <h2 class="text-center mb-4">Student Login</h2>
 
-    <form method="POST">
+    <form method="POST"
+      name="loginForm"
+      onsubmit="return validateLoginForm()">
 
         <div class="form-group">
             <label>Username</label>
@@ -73,16 +75,58 @@ if(isset($_POST['login'])){
                    required>
         </div>
 
-        <button type="submit"
-                name="login"
-                class="btn btn-primary">
+        <div class="mt-3">
 
-            Login
-        </button>
+    <button type="submit"
+            name="login"
+            class="btn btn-primary">
+
+        Login
+    </button>
+
+</div>
+
+<p class="mt-3">
+
+    Don't have an account?
+
+    <a href="register.php">
+        Create new account
+    </a>
+
+</p>
+
+<p>
+
+    <a href="index.php">
+        Back to Home
+    </a>
+
+</p>
 
     </form>
 
 </div>
+
+<!-- Loging Page Validation -->
+<script>
+
+function validateLoginForm(){
+
+    let username = document.forms["loginForm"]["username"].value;
+    let password = document.forms["loginForm"]["password"].value;
+
+    if(username == "" || password == ""){
+
+        alert("All fields are required!");
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
 
 </body>
 </html>

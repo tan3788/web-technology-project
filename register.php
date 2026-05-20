@@ -16,7 +16,10 @@ if(isset($_POST['submit'])){
     if(!$result){
         die("Query Error: " . mysqli_error($conn));
     } else {
-        echo "Data inserted successfully";
+        echo "<script>
+            alert('Registration successful!');
+            window.location.href='login.php';
+          </script>";
     }
 }
 ?>
@@ -38,7 +41,13 @@ if(isset($_POST['submit'])){
 
     <h2 class="text-center mb-4">User Registration</h2>
 
-    <form method="POST">     
+    <form method="POST" 
+      name="registerForm"
+      onsubmit="return validateRegisterForm()">
+      
+        <div id="error-message"
+          class="alert alert-danger d-none">
+        </div>
 
         <div class="form-group">
             <label>Username</label>
@@ -56,15 +65,101 @@ if(isset($_POST['submit'])){
             <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
         </div>
 
+        <div class="form-group">
+    <label>Confirm Password</label>
+
+    <input type="password"
+           name="confirm_password"
+           class="form-control"
+           placeholder="Confirm your password"
+           required>
+</div>
+
         
 
         <button type="submit" name="submit" class="btn btn-primary">
             Submit
         </button>
 
+        <p class="mt-3">
+
+    Already have an account?
+
+    <a href="login.php">
+        Login
+    </a>
+
+</p>
+
+<p>
+
+    <a href="index.php">
+        Back to Home
+    </a>
+
+</p>
+
     </form>
 
 </div>
+
+
+<script>
+
+function validateRegisterForm(){
+
+    let username = document.forms["registerForm"]["username"].value.trim();
+    let email = document.forms["registerForm"]["email"].value.trim();
+    let password = document.forms["registerForm"]["password"].value;
+    let confirmPassword = document.forms["registerForm"]["confirm_password"].value;
+
+    let errorBox = document.getElementById("error-message");
+
+    errorBox.classList.add("d-none");
+
+    // Empty fields
+    if(username === "" || email === "" || password === "" || confirmPassword === ""){
+
+        errorBox.innerHTML = "All fields are required!";
+        errorBox.classList.remove("d-none");
+
+        return false;
+    }
+
+    // Email validation
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!email.match(emailPattern)){
+
+        errorBox.innerHTML = "Please enter a valid email address!";
+        errorBox.classList.remove("d-none");
+
+        return false;
+    }
+
+    // Password length
+    if(password.length < 6){
+
+        errorBox.innerHTML = "Password must be at least 6 characters!";
+        errorBox.classList.remove("d-none");
+
+        return false;
+    }
+
+    // Confirm password
+    if(password !== confirmPassword){
+
+        errorBox.innerHTML = "Passwords do not match!";
+        errorBox.classList.remove("d-none");
+
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
 
 </body>
 </html>
