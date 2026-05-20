@@ -1,4 +1,15 @@
 <?php
+
+session_start();
+
+if(!isset($_SESSION['username'])){
+    header("Location: login.php");
+    exit();
+}
+
+?>
+
+<?php
 require_once 'config.php';
 
 // Check if user has items in cart

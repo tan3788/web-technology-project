@@ -1,4 +1,8 @@
 <?php
+session_start();
+?>
+
+<?php
 require_once 'config.php';
 
 // Get search and category filters
@@ -33,25 +37,93 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
     <title>Simple E-commerce Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+
+body.dark-mode{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .card{
+    background-color: #1f1f1f;
+    color: white;
+}
+
+body.dark-mode .navbar{
+    background-color: #000 !important;
+}
+
+body.dark-mode .text-muted{
+    color: #bdbdbd !important;
+}
+
+</style>
+
 </head>
+
+
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+         <div class="container">
             <a class="navbar-brand" href="index.php">
                 <i class="bi bi-shop"></i> Simple Store
             </a>
             
-            <div class="d-flex">
-                <a href="cart.php" class="btn btn-outline-light">
-                    <i class="bi bi-cart"></i> Cart 
-                    <?php if ($cartCount > 0): ?>
-                        <span class="badge bg-warning text-dark"><?php echo $cartCount; ?></span>
-                    <?php endif; ?>
-                </a>
-            </div>
-        </div>
-    </nav>
+             <div class="d-flex align-items-center">
+
+                 <?php if(isset($_SESSION['username'])) { ?>
+
+                     <a href="profile.php" class="btn btn-light me-2">
+                        Profile
+                     </a>
+
+                     <a href="cart.php" class="btn btn-outline-light me-2">
+                         <i class="bi bi-cart"></i> Cart 
+                         <?php if ($cartCount > 0): ?>
+                            <span class="badge bg-warning text-dark">
+                               <?php echo $cartCount; ?>
+                            </span>
+                         <?php endif; ?>
+                     </a>
+
+                     <button onclick="toggleDarkMode()" 
+                             class="btn btn-dark me-2">
+
+                          Dark Mode
+                     </button>
+
+                     <a href="logout.php" class="btn btn-danger">
+                         Logout
+                     </a>
+
+                 <?php } else { ?>
+
+                     <a href="login.php" class="btn btn-light me-2">
+                       Login
+                     </a>
+
+                     <a href="register.php" class="btn btn-success me-2">
+                       Register
+                     </a>
+
+                     <a href="cart.php" class="btn btn-outline-light">
+                        <i class="bi bi-cart"></i> Cart 
+                         <?php if ($cartCount > 0): ?>
+                             <span class="badge bg-warning text-dark">
+                                 <?php echo $cartCount; ?>
+                             </span>
+                         <?php endif; ?>
+                     </a>
+
+                 <?php } ?>
+
+             </div>
+            
+         </div>
+     </nav>
 
     <div class="container py-4">
         <h1 class="mb-4">Our Products</h1>
@@ -215,5 +287,26 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
             });
         });
     </script>
+
+    <!-- DarkMode -->
+<script>
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+}
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+
+</script>
+
 </body>
 </html>
