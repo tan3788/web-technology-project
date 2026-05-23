@@ -78,6 +78,57 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
     <title>Shopping Cart - Simple Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+    body.dark-mode{
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .card{
+    background-color: #1f1f1f;
+    color: white;
+}
+
+body.dark-mode .navbar{
+    background-color: #000 !important;
+}
+
+body.dark-mode .text-muted{
+    color: #bdbdbd !important;
+}
+
+body{
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.card{
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.navbar{
+    transition: 0.3s;
+}
+
+.navbar-brand{
+    letter-spacing: 1px;
+}
+
+.navbar .btn{
+    transition: 0.3s;
+}
+
+.navbar .btn:hover{
+    transform: translateY(-2px);
+}
+
+    </Style>
 </head>
 <body>
     <!-- Navigation -->
@@ -146,7 +197,7 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>৳<?php echo number_format($item['product']['price'], 2); ?></td>
+                                            <td>$<?php echo number_format($item['product']['price'], 2); ?></td>
                                             <td>
                                                 <input type="number" 
                                                        name="quantity[<?php echo $item['product']['id']; ?>]" 
@@ -158,7 +209,7 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
                                                        data-price="<?php echo $item['product']['price']; ?>">
                                             </td>
                                             <td class="subtotal-cell" data-product-id="<?php echo $item['product']['id']; ?>">
-                                                ৳<?php echo number_format($item['subtotal'], 2); ?>
+                                                $<?php echo number_format($item['subtotal'], 2); ?>
                                             </td>
                                             <td>
                                                 <button type="button" 
@@ -192,7 +243,7 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <strong>Total Amount:</strong>
-                                    <strong id="total-amount">৳<?php echo number_format($total, 2); ?></strong>
+                                    <strong id="total-amount">$<?php echo number_format($total, 2); ?></strong>
                                 </div>
                                 <hr>
                                 <a href="payment.php" class="btn btn-success w-100">
@@ -258,7 +309,7 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
         function updateCartDisplay(data) {
             // Update total items and amount
             document.getElementById('total-items').textContent = data.cartCount;
-            document.getElementById('total-amount').textContent = '৳' + data.total.toFixed(2);
+            document.getElementById('total-amount').textContent = '$' + data.total.toFixed(2);
             
             // Update navbar cart count
             const cartLink = document.querySelector('a[href="cart.php"]');
@@ -282,7 +333,7 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
             data.cartItems.forEach(item => {
                 const subtotalCell = document.querySelector(`.subtotal-cell[data-product-id="${item.id}"]`);
                 if (subtotalCell) {
-                    subtotalCell.textContent = '৳' + item.subtotal.toFixed(2);
+                    subtotalCell.textContent = '$' + item.subtotal.toFixed(2);
                 }
             });
         }
@@ -412,6 +463,30 @@ $cartCount = isset($_SESSION['cart']) ? array_sum($_SESSION['cart']) : 0;
                 }
             });
         }
+
+    
     </script>
+
+    <script>
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+}
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+
+</script>
+
+
+
 </body>
 </html>

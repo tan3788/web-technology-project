@@ -163,11 +163,158 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             100% { transform: rotate(360deg); }
         }
 
-    </style>
+        body.dark-mode{
+    background-color: #121212;
+    color: white;
+}
+/* Full Page */
+
+body.dark-mode,
+body.dark-mode main,
+body.dark-mode section,
+body.dark-mode .container,
+body.dark-mode .container-fluid{
+    background-color: #121212 !important;
+    color: white;
+}
+
+/* Navbar */
+
+body.dark-mode .navbar{
+    background-color: #000 !important;
+}
+
+body.dark-mode .navbar .nav-link,
+body.dark-mode .navbar .navbar-brand,
+body.dark-mode .navbar span,
+body.dark-mode .navbar i{
+    color: white !important;
+}
+
+/* Bootstrap Containers */
+
+body.dark-mode .bg-light{
+    background-color: #121212 !important;
+}
+
+body.dark-mode .bg-white{
+    background-color: #1f1f1f !important;
+}
+
+/* Buttons */
+
+body.dark-mode .btn-outline-dark{
+    color: white;
+    border-color: white;
+}
+
+body.dark-mode .btn-outline-dark:hover{
+    background-color: white;
+    color: black;
+}
+
+/* Cards */
+
+body.dark-mode .card{
+    background-color: #1f1f1f;
+    color: white;
+}
+
+/* Payment Form */
+
+body.dark-mode .payment-form{
+    background-color: #1f1f1f;
+    color: white;
+}
+
+/* Order Summary */
+
+body.dark-mode .order-summary{
+    background-color: #2a2a2a;
+    color: white;
+    border-left: 4px solid #ff4081;
+}
+
+/* Loader */
+
+body.dark-mode .loader-content{
+    background-color: #1f1f1f;
+    color: white;
+}
+
+/* bKash Container */
+
+body.dark-mode .bkash-container{
+    background: linear-gradient(135deg, #9d174d, #be185d);
+}
+
+/* Inputs */
+
+body.dark-mode .form-control{
+    background-color: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+}
+
+body.dark-mode .form-control::placeholder{
+    color: #bdbdbd;
+}
+
+body.dark-mode .form-control:focus{
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #6366f1;
+    box-shadow: none;
+}
+
+/* Labels & Text */
+
+body.dark-mode label,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode span{
+    color: white;
+}
+
+/* Tables */
+
+body.dark-mode .table{
+    color: white;
+}
+
+body.dark-mode .table td,
+body.dark-mode .table th{
+    border-color: #444;
+}
+
+/* Bootstrap Helpers */
+
+body.dark-mode .text-dark{
+    color: white !important;
+}
+
+body.dark-mode .bg-white{
+    background-color: #1f1f1f !important;
+}
+
+/* Footer */
+
+footer{
+    border-top: 2px solid #444;
+    transition: 0.3s;
+}
+
+</style>
+
 </head>
 <body class="bg-light">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="index.php">
                 <i class="bi bi-shop"></i> Simple Store
@@ -239,7 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     
                                     <input type="hidden" name="process_payment" value="1">
                                     <button type="submit" class="btn btn-danger w-100" id="payBtn">
-                                        <i class="bi bi-credit-card"></i> Pay ৳<?php echo number_format($total, 2); ?>
+                                        <i class="bi bi-credit-card"></i> Pay $<?php echo number_format($total, 2); ?>
                                     </button>
                                 </form>
                             </div>
@@ -250,13 +397,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <?php foreach ($cartItems as $item): ?>
                                         <div class="d-flex justify-content-between mb-2">
                                             <span><?php echo htmlspecialchars($item['product']['name']); ?> × <?php echo $item['quantity']; ?></span>
-                                            <span>৳<?php echo number_format($item['subtotal'], 2); ?></span>
+                                            <span>$<?php echo number_format($item['subtotal'], 2); ?></span>
                                         </div>
                                     <?php endforeach; ?>
                                     <hr>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span>Total</span>
-                                        <span>৳<?php echo number_format($total, 2); ?></span>
+                                        <span>$<?php echo number_format($total, 2); ?></span>
                                     </div>
                                 </div>
                                 
@@ -328,5 +475,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // The loader will be visible during server processing
         });
     </script>
+
+    <script>
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+}
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+}
+
+</script>
 </body>
 </html>

@@ -234,7 +234,7 @@ footer{
                     <div class="col-md-4 col-lg-3 mb-4">
                         <div class="card h-100">
                             <img src="<?php echo htmlspecialchars($product['image']); ?>" 
-                                 class="card-img-top" 
+                                 class="card-img-top " 
                                  alt="<?php echo htmlspecialchars($product['name']); ?>"
                                  style="height: 200px; object-fit: cover; background-color: #f8f9fa;"
                                  onerror="this.onerror=null; this.src='placeholder.php?w=300&h=200&text=<?php echo urlencode($product['name']); ?>&bg=e9ecef&color=6c757d';"
@@ -248,7 +248,7 @@ footer{
                                     <span class="badge bg-secondary"><?php echo $product['category']; ?></span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="text-primary mb-0">৳<?php echo number_format($product['price'], 2); ?></h5>
+                                    <h5 class="text-primary mb-0">$<?php echo number_format($product['price'], 2); ?></h5>
                                     <button type="button" class="btn btn-primary btn-sm add-to-cart-btn" 
                                             data-product-id="<?php echo $product['id']; ?>"
                                             data-product-name="<?php echo htmlspecialchars($product['name']); ?>">
