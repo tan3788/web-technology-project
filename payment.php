@@ -70,6 +70,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Generate transaction ID
                 $transactionId = 'BKT' . date('Ymd') . rand(100000, 999999);
                 
+                // Save Order to Database
+
+$user_id = $_SESSION['id'];
+
+$customer_name = $_SESSION['username'];
+
+$customer_email = $_SESSION['email'] ?? 'customer@example.com';
+
+$payment_method = "bKash";
+
+$total_amount = $total;
+
+$order_sql = "INSERT INTO orders
+
+(user_id,
+ customer_name,
+ customer_email,
+ payment_method,
+ total_amount)
+
+VALUES
+
+('$user_id',
+ '$customer_name',
+ '$customer_email',
+ '$payment_method',
+ '$total_amount')";
+
+mysqli_query($conn, $order_sql);
                 // Clear cart
                 $_SESSION['cart'] = array();
                 

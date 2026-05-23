@@ -39,6 +39,12 @@ $result = mysqli_query($conn, $sql);
            Add Product
 
         </a>
+        <a href="admin_orders.php"
+   class="btn btn-primary ms-2">
+
+   View Orders
+
+</a>
 
     </div>
 
