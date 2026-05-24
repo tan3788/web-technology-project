@@ -139,7 +139,7 @@ body{
 
 .register-container{
     width: 80%;
-    max-width: 1100px;
+    max-width: 950px;
 
     margin: 20px auto;
 
@@ -156,7 +156,7 @@ body{
 
 .left-side{
     width: 50%;
-    padding: 25px 40px;
+    padding: 25px 35px;
     position: relative;
 }
 
@@ -175,14 +175,14 @@ body{
 }
 
 .right-side h1{
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
     color: #ffb020;
 }
 
 .right-side p{
-    font-size: 20px;
-    margin-top: 20px;
+    font-size: 18px;
+    margin-top: 18px;
 }
 
 .login-btn{
@@ -192,7 +192,7 @@ body{
     border-radius: 35px;
     margin-top: 25px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 18px;
     transition: 0.3s;
 }
 
@@ -210,7 +210,7 @@ body{
 
 .form-title{
     color: #6366f1;
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: 25px;
@@ -222,15 +222,15 @@ body{
 
 .form-label{
     color: #6366f1;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .form-control{
-    height: 45px;
+    height: 40px;
     border-radius: 18px;
     border: 2px solid #d1d5db;
-    font-size: 24px;
+    font-size: 18px;
     padding-left: 20px;
 }
 
@@ -240,13 +240,13 @@ body{
 }
 
 .signup-btn{
-    width: 100%;
-    height: 50px;
+    width: 70%;
+    height: 40px;
     border: none;
     border-radius: 18px;
     background: linear-gradient(135deg, #6366f1, #4f46e5);
     color: white;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
     transition: 0.3s;
